@@ -5,10 +5,10 @@
 
 using namespace std;
 
-vector<int> calory;	// 1¿øºÎÅÍ »ó±ÙÀÌ°¡ °¡Áø µ·±îÁö 1¿ø¾¿ Áõ°¡½ÃÅ°¸é¼­ Ä®·Î¸®¸¦ °è»ê. 
-vector< int > candy; // ÄµµğÀÇ Á¤º¸¸¦ ÀúÀå. ÀÌ¶§ °¡°İº°·Î Á¤ÇØÁø ÀÎµ¦½º¿¡ ÀúÀå. 
-vector<bool> check; // Á¤ÇØÁø ÀÎµ¦½º¿¡ ÄµµğÀÇ Á¤º¸°¡ ÀúÀåµÇ¾ú´ÂÁö¸¦ Ã¼Å©ÇØÁÖ´Â ¹è¿­. 
-vector< pair<int,int> > rcandy; // Áßº¹ Á¦°ÅµÈ Äµµğ. 
+vector<int> calory;	// 1ì›ë¶€í„° ìƒê·¼ì´ê°€ ê°€ì§„ ëˆê¹Œì§€ 1ì›ì”© ì¦ê°€ì‹œí‚¤ë©´ì„œ ì¹¼ë¡œë¦¬ë¥¼ ê³„ì‚°. 
+vector< int > candy; // ìº”ë””ì˜ ì •ë³´ë¥¼ ì €ì¥. ì´ë•Œ ê°€ê²©ë³„ë¡œ ì •í•´ì§„ ì¸ë±ìŠ¤ì— ì €ì¥. 
+vector<bool> check; // ì •í•´ì§„ ì¸ë±ìŠ¤ì— ìº”ë””ì˜ ì •ë³´ê°€ ì €ì¥ë˜ì—ˆëŠ”ì§€ë¥¼ ì²´í¬í•´ì£¼ëŠ” ë°°ì—´. 
+vector< pair<int,int> > rcandy; // ì¤‘ë³µ ì œê±°ëœ ìº”ë””. 
 
 bool compare(const pair<int,int>& p1, const pair<int,int>& p2) {
 	return p1.second < p2.second;	
@@ -23,7 +23,7 @@ void set_list_of_candy(void) {
 
 void print_calory(int money) {
 	for(int i=0;i<=money;++i)
-		printf("%d¿øÀÏ¶§: %d\n",i,calory[i]); 
+		printf("%dì›ì¼ë•Œ: %d\n",i,calory[i]); 
 	cout << endl;
 }
 
@@ -57,7 +57,7 @@ int main(void)
 	
 	while(cin >> n >> m) {
 		if(n==0) break;
-		int money = (int)(m*100.00+0.5);
+		int money = (int)(m*100.00);
 		candy.clear();
 		check.clear();
 		calory.clear();
@@ -69,7 +69,7 @@ int main(void)
 		
 		for(int i=0;i<n;++i) {
 			cin >> c >> p;
-			index = (int)(p*100.00+0.5);
+			index = (int)(p*100.00);
 			if(!check[index]) {
 				check[index]=true;
 				candy[index]=c;	
