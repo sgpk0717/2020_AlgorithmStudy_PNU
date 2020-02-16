@@ -1,26 +1,66 @@
-/* 9237 이장님 초대
-2376KB	12ms	C++14 	445B
-https://www.acmicpc.net/problem/9237 
-*/
+#include <bits/stdc++.h>
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
 using namespace std;
 
-int main(void){
-	ios::sync_with_stdio(0);cin.tie(0); // 사용 시 시간 대폭 감소 
-	int n,d,m=0;
-	cin >> n;
-	vector<int> v(n);
-	for(size_t i=0; i<n; i++){
-		cin >> d; 
-		v[i] = d;
+bool checkAllZero(vector<int> vec)
+{
+	for(int i=0; i<vec.size(); ++i) {
+		if(vec[i]!=0) return false;
 	}
-	sort(v.begin(), v.end(), greater<int>());
-	for(int i=0; i<n; i++){
-		m = max(m, v[i]+i);
+	return true;
+}
+void print(vector<int> vec)
+{
+	for(int i=0; i<vec.size(); ++i) {
+		cout << vec[i] << ' ';
 	}
-	cout << m+2;
-	return 0;
-} 
+	cout << endl;
+}
+bool desc(int a, int b)
+{
+	return a>b;
+}
+int main(void)
+{
+//	ifstream ifs("9237_2.inp");
+	int N = 0; // 묘목의 수 1<=N<=100000
+	int t = 0; // 묘목이 자라는데 걸리는 일수 1<=t<=1000000
+	int day = 2;
+	
+	vector<int> tree;
+	
+//	ifs >> N;
+	cin >> N;
+	for(int i=0; i<N; ++i) {
+//		ifs >> t;
+		cin >> t;
+		tree.push_back(t);
+	}
+	
+//	ifs.close();
+	
+	sort(tree.begin(), tree.end(), desc);
+	
+	vector<int> growing;
+	int plantTree = 0;
+	growing.push_back(tree[plantTree]);
+	++day; ++plantTree;
+	
+	while(!checkAllZero(growing)) {
+		++day;
+		if(plantTree!=N) {
+			growing.push_back(tree[plantTree]);
+			++plantTree;		
+		}
+		for(int i=0; i<growing.size(); ++i) {
+			if(growing[i]!=0) --growing[i];
+		}		
+		
+//		cout << "Day " << day << " : ";
+//		print(growing);
+	}
+	
+//	cout << "\nDay : " << day << endl;
+	cout << day;
+    return 0;
+}
