@@ -1,0 +1,91 @@
+#include <iostream>
+
+using namespace std;
+
+class node{
+	public:
+		char data;
+		node *left;
+		node *right;
+		node(){}
+		node(char data) : data(data){
+			left = NULL;
+			right = NULL;
+		}
+		~node(){
+			this -> data = NULL;
+			left = NULL;
+			right = NULL;
+		}
+};
+
+node* root;
+
+node* searchNode(node* R, char pid){
+	if(R == 0) return 0;
+	
+	if(R ->data == pid) return R;
+	
+	node* right = searchNode(R->right, pid);
+	node* left = searchNode(R->left, pid);
+	if(right != 0 ) return right;
+	if(left != 0 ) return left;
+	return 0;
+}
+
+void preorderPrint(node* R)
+{
+	if(R == 0)return;
+	
+	cout << R->data ;
+	preorderPrint(R->left);
+	preorderPrint(R->right);
+}
+
+void inorderPrint(node* R)
+{
+	if(R == 0)return;
+	
+	inorderPrint(R ->left);
+	cout << R->data;
+	inorderPrint(R->right);
+}
+
+void postorderPrint(node* R)
+{
+	if(R == 0) return;
+	
+	postorderPrint(R->left);
+	postorderPrint(R->right);
+	cout << R ->data;
+}
+
+
+int main (void){
+	
+	int num_node ; 
+	
+	cin >> num_node ;
+	
+	root = new node('A');
+	
+	
+	
+	for(int i = 0 ; i < num_node ; ++i)
+	{
+		char Root, Right, Left;
+		cin >> Root >> Left >> Right ;
+		node* par = searchNode(root,Root);
+		
+		if(Left != '.') par->left = new node(Left);
+		if(Right != '.') par->right = new node(Right);
+	}
+	
+	preorderPrint(root);
+	cout << endl;
+	inorderPrint(root);
+	cout << endl;
+	postorderPrint(root);
+	
+	return 0;
+}
