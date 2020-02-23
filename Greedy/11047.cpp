@@ -1,36 +1,55 @@
-/*  11047 동전 0 
-	1984KB	0ms	C++14
-  	
-	가치가 주어진 동전들로 최소한을 사용해 정해진 값을 채운다. 
-	그리디 알고리즘 사용  
-	
-	https://www.acmicpc.net/problem/11047 
+/*
+
 */
 
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int M[10];
-int P,N;
+void print(vector<int> vec)
+{
+	for(int i=0; i<vec.size(); ++i) 
+		cout << vec[i] << ' ';
+	cout << endl;
+}
 
-int main(void){
-	int ans = 1<<30;
-	cin >> N >> P;  // 동전 수와 정해진 값  
-	for(int i=0; i<N; i++)
-		cin >> M[i]; // 동전의 가치들 
+int main(void)
+{
+	int N, K; // 1<=N<=10, 1<=K<=100000000
+//	ifstream ifs("11047_2.inp");
+//	ifs >> N >> K;
+	cin >> N >> K;
 	
-	for(int i=0; i<N; i++){
-		int a = 0;
-		int p = P;
-		for(int j=i; j>=0; j--){
-			a += p/M[j];
-			p = p%M[j];
+	vector<int> coinList;
+	for(int i=0; i<N; ++i) {
+		int coin;
+//		ifs >> coin;
+		cin >> coin;
+		coinList.push_back(coin);
+	}
+//	ifs.close();
+	
+//	cout << "동전 종류" << endl;
+//	print(coinList);
+//	cout << "-------------------------------" << endl;
+	
+	int numCoin = 0;
+	
+	for(int i=coinList.size()-1; i>=0; --i) {
+		int coinTmp = coinList[i];
+		
+		while(1) {
+			if(K-coinTmp<0)		break;
+			numCoin++;
+			K = K-coinTmp;
+			
+//			cout << coinTmp << endl;
 		}
-		ans = min(ans, a);	
+		
+		if(K==0) break;
 	}
 	
-	cout << ans;
+	cout << numCoin;
+	
 	return 0;
 }
