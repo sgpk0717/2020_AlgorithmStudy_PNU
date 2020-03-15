@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#define INF 999999
+#define INF 99999999
 
 using namespace std;
 
